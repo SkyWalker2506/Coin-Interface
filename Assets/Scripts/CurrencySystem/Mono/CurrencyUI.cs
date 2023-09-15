@@ -6,7 +6,7 @@ namespace CurrencySystem
 {
     public abstract class CurrencyUI : MonoBehaviour, ICurrencyUI
     {
-        public virtual TMP_Text CurrencyText { get; }
+        [field:SerializeField] public virtual TMP_Text CurrencyText { get; protected set; }
         public virtual ICurrency Currency { get; }
 
         protected virtual void OnEnable()
@@ -23,5 +23,6 @@ namespace CurrencySystem
         {
             CurrencyText.SetText(Currency.Amount.ToString(CultureInfo.InvariantCulture));
         }
+
     }
 }
