@@ -3,6 +3,6 @@
     public interface IFloatSaveData 
     {
         public void Save(float value);
-        public float GetSavedFloatData();
+        public float GetSavedFloat();
     }
 }

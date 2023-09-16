@@ -2,7 +2,7 @@
 
 namespace SaveSystem
 {
-    public abstract class SaveDataPlayerPrefBase : ISaveData
+    public abstract class SaveDataPlayerPrefBase : ISaveData 
     {
         public string Key { get; }
         public string Value { get; protected set;}

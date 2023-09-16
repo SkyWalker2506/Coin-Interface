@@ -5,6 +5,6 @@ namespace SaveSystem
     public interface IDateTimeSaveData 
     {
         public void Save(DateTime value);
-        public DateTime GetSavedFloatData();
+        public DateTime GetSavedDateTime();
     }
 }

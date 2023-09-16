@@ -13,7 +13,7 @@ namespace Game.CurrencySystem
         private void Awake()
         {
             saveData = new SaveFloatPlayerPref(saveKey, defaultCoinAmount);
-            Set(saveData.GetSavedFloatData());
+            Set(saveData.GetSavedFloat());
         }
 
         public override void Set(float value)

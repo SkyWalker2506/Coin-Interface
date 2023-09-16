@@ -1,5 +1,4 @@
-﻿using System;
-using SaveSystem;
+﻿using SaveSystem;
 using TimeSystem;
 
 namespace Game.TimeSystem
@@ -12,7 +11,7 @@ namespace Game.TimeSystem
         private void Awake()
         {
             dateTimeSaveData = new SaveDateTimePlayerPref(saveKey, LastUsedTime.ToString("t"));
-            LastUsedTime = dateTimeSaveData.GetSavedFloatData();
+            LastUsedTime = dateTimeSaveData.GetSavedDateTime();
         }
 
         public override void Use()
