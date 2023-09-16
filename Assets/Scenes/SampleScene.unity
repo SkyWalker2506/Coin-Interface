@@ -730,7 +730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockingWaitPopup: {fileID: 862821849}
   currencyController: {fileID: 92161884}
-  freeCoinDailyEvent: {fileID: 1656855334}
+  savableDailyEvent: {fileID: 1656855334}
 --- !u!224 &862821846 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3974171538541356753, guid: 5e6b4704a5c0d4875856edc3036e365e, type: 3}
@@ -1273,7 +1273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dailyEvent: {fileID: 1656855334}
   eventText: {fileID: 204157264}
-  <availableEventText>k__BackingField: Claim Free Coin
 --- !u!1 &1964048182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 147}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -80, y: 160.567}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2095654902

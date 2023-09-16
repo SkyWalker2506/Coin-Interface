@@ -1,12 +1,13 @@
 using CurrencySystem;
 using Game.TimeSystem;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private BlockingWait blockingWaitPopup;
     [SerializeField] private CurrencyController currencyController;
-    [SerializeField] private FreeCoinDailyEvent freeCoinDailyEvent;
+    [SerializeField] private SavableDailyEvent savableDailyEvent;
     
     public void Action_SpendOneCoin()
     {
@@ -21,9 +22,10 @@ public class MainMenu : MonoBehaviour
 
     public void Action_ClaimFreeCoin()
     {
-        if (freeCoinDailyEvent.IsReadyToUse())
+        if (savableDailyEvent.IsReadyToUse())
         {
-            freeCoinDailyEvent.Use();
+            savableDailyEvent.Use();
+            currencyController.Increase(1);
         }
     }
 }

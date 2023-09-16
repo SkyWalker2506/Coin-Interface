@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace TimeSystem
@@ -8,17 +7,22 @@ namespace TimeSystem
     {
         [SerializeField] private DailyEvent dailyEvent;
         [SerializeField] private TMP_Text eventText;
-        [field:SerializeField] protected string availableEventText { get; set; }
+        string initialText { get; set; }
+
+        private void Awake()
+        {
+            initialText = eventText.text;
+        }
 
         private void Update()
         {
             if (dailyEvent.IsReadyToUse())
             {
-                eventText.SetText(availableEventText);
+                eventText.SetText(initialText);
             }
             else
             {
-                eventText.SetText(dailyEvent.GetRemainingTime().ToString());
+                eventText.SetText(dailyEvent.GetRemainingTime().ToString().Split(".")[0]);
             }
         }
     }
