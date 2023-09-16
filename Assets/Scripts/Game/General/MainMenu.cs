@@ -1,28 +1,29 @@
 using CurrencySystem;
+using Game.TimeSystem;
 using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField]
-    BlockingWait blockingWaitPopup;
-
-    [SerializeField] private CurrencyManager currencyManager;
-
+    [SerializeField] private BlockingWait blockingWaitPopup;
+    [SerializeField] private CurrencyController currencyController;
+    [SerializeField] private FreeCoinDailyEvent freeCoinDailyEvent;
+    
     public void Action_SpendOneCoin()
     {
-        Debug.Log("MainMenu:Action_SpendOneCoin");
-        currencyManager.Decrease(1);
+        currencyController.Decrease(1);
     }
 
     public void Action_GetExtraCoin()
     {
-        Debug.Log("MainMenu:Action_GetExtraCoin");
         blockingWaitPopup.gameObject.SetActive(true);
-        currencyManager.Increase(1);
+        currencyController.Increase(1);
     }
 
     public void Action_ClaimFreeCoin()
     {
-        Debug.Log("MainMenu:Action_ClaimFreeCoin");
+        if (freeCoinDailyEvent.IsReadyToUse())
+        {
+            freeCoinDailyEvent.Use();
+        }
     }
 }

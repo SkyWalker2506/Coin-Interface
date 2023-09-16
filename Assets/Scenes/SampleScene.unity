@@ -729,7 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockingWaitPopup: {fileID: 862821849}
-  currencyManager: {fileID: 92161884}
+  currencyController: {fileID: 92161884}
+  freeCoinDailyEvent: {fileID: 1656855334}
 --- !u!224 &862821846 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3974171538541356753, guid: 5e6b4704a5c0d4875856edc3036e365e, type: 3}
@@ -853,7 +854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1113124953}
   m_Layer: 0
-  m_Name: -----Manager-----
+  m_Name: -----Controller-----
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +913,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 729.8, y: 160}
+  m_SizeDelta: {x: 730, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1439004239
 MonoBehaviour:
@@ -1119,6 +1120,8 @@ GameObject:
   - component: {fileID: 1656855333}
   - component: {fileID: 1656855332}
   - component: {fileID: 1656855331}
+  - component: {fileID: 1656855334}
+  - component: {fileID: 1656855335}
   m_Layer: 5
   m_Name: FreeCoinButton
   m_TagString: Untagged
@@ -1145,7 +1148,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 729.8, y: 160}
+  m_SizeDelta: {x: 730, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1656855331
 MonoBehaviour:
@@ -1241,6 +1244,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656855329}
   m_CullTransparentMesh: 1
+--- !u!114 &1656855334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656855329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f2cd4d2ad714a27943d3e15cc530c5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hour: 1
+  Minute: 0
+  Second: 0
+--- !u!114 &1656855335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656855329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a73ab22d12408fb8a9fd974b38d32f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailyEvent: {fileID: 1656855334}
+  eventText: {fileID: 204157264}
+  <availableEventText>k__BackingField: Claim Free Coin
 --- !u!1 &1964048182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1563,7 +1596,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 729.8, y: 160}
+  m_SizeDelta: {x: 730, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108290759
 MonoBehaviour:
@@ -1713,7 +1746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6936510752828852325, guid: c084f87faf2605c4e80fd993b1f3e51d, type: 3}
       propertyPath: m_Name
-      value: CoinManager
+      value: Coin Controller
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -2,7 +2,7 @@
 
 namespace CurrencySystem
 {
-    public abstract class CurrencyManagerForSC : CurrencyManager
+    public abstract class CurrencyControllerForSC : CurrencyController
     {
         [SerializeField] private ScriptableCurrency currency;
         public override ICurrency Currency => currency;

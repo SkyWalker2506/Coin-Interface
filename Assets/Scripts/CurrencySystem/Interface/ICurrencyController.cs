@@ -1,6 +1,6 @@
 ﻿namespace CurrencySystem
 {
-    public interface ICurrencyManager
+    public interface ICurrencyController
     {
         ICurrency Currency { get; }
         void Set(float value);

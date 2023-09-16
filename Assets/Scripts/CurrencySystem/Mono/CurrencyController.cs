@@ -2,7 +2,7 @@
 
 namespace CurrencySystem
 {
-    public abstract class CurrencyManager : MonoBehaviour, ICurrencyManager
+    public abstract class CurrencyController : MonoBehaviour, ICurrencyController
     {
         public virtual ICurrency Currency { get; protected set; }
 

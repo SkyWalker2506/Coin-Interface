@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1198266776113631833}
   - component: {fileID: 8200222279340078118}
   m_Layer: 0
-  m_Name: CoinManager
+  m_Name: Coin Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

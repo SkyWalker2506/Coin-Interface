@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.CurrencySystem
 {
-    public class Coin : CurrencyManagerForSC
+    public class CoinController : CurrencyControllerForSC
     {
         [SerializeField] private string saveKey = "Coin";
         [SerializeField] private float defaultCoinAmount;
