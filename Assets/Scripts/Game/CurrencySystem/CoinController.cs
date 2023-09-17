@@ -8,18 +8,18 @@ namespace Game.CurrencySystem
     {
         [SerializeField] private string saveKey = "Coin";
         [SerializeField] private float defaultCoinAmount;
-        private IFloatSaveData saveData;
+        private IFloatSave _save;
 
         private void Awake()
         {
-            saveData = new SaveFloatPlayerPref(saveKey, defaultCoinAmount);
-            Set(saveData.GetSavedFloat());
+            _save = new SaveFloatPlayerPref(saveKey, defaultCoinAmount);
+            Set(_save.GetSavedFloat());
         }
 
         public override void Set(float value)
         {
             base.Set(value);
-            saveData.Save(value);
+            _save.Save(value);
         }
     }
 }

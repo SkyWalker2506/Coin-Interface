@@ -2,7 +2,7 @@
 
 namespace SaveSystem
 {
-    public class SaveFloatPlayerPref : SaveDataPlayerPrefBase, IFloatSaveData
+    public class SaveFloatPlayerPref : SaveDataPlayerPrefBase, IFloatSave
     {
         public SaveFloatPlayerPref(string key, float defaultValue = 0) : base(key, defaultValue.ToString(CultureInfo.InvariantCulture))
         {

@@ -2,9 +2,9 @@
 
 namespace SaveSystem
 {
-    public class SaveIntPlayerPref : SaveDataPlayerPrefBase, IIntSaveData
+    public class SaveIntPlayerPref : SaveDataPlayerPrefBase, IIntSave
     {
-        public SaveIntPlayerPref(string key, string defaultValue = "") : base(key, defaultValue)
+        public SaveIntPlayerPref(string key, int defaultValue = 0) : base(key, defaultValue.ToString())
         {
         }
 
@@ -16,6 +16,7 @@ namespace SaveSystem
 
         public int GetSavedInt()
         {
+            Load();
             return int.Parse(Value);
         }
     }

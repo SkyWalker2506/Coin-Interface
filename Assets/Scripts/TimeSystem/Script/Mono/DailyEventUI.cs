@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace TimeSystem
@@ -14,16 +15,30 @@ namespace TimeSystem
             initialText = eventText.text;
         }
 
-        private void Update()
+        private void OnEnable()
+        {
+            dailyEvent.OnTick += UpdateUI;
+            dailyEvent.OnRenewal += UpdateUIAfterRenewal;
+        }
+
+        private void OnDisable()
+        {
+            dailyEvent.OnTick -= UpdateUI;
+            dailyEvent.OnRenewal -= UpdateUIAfterRenewal;
+        }
+
+        private void UpdateUI()
         {
             if (dailyEvent.IsReadyToUse())
             {
+                return;
+            }
+            eventText.SetText(dailyEvent.GetRemainingTime().ToString().Split(".")[0]);
+        }
+        
+        private void UpdateUIAfterRenewal()
+        {
                 eventText.SetText(initialText);
-            }
-            else
-            {
-                eventText.SetText(dailyEvent.GetRemainingTime().ToString().Split(".")[0]);
-            }
         }
     }
 }

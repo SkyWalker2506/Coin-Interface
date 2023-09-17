@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace SaveSystem
 {
-    public class SaveDateTimePlayerPref : SaveDataPlayerPrefBase, IDateTimeSaveData
+    public class SaveDateTimePlayerPref : SaveDataPlayerPrefBase, IDateTimeSave
     {
-        public SaveDateTimePlayerPref(string key, string defaultValue = "") : base(key, defaultValue)
+        public SaveDateTimePlayerPref(string key, DateTime defaultValue = new DateTime()) : base(key, defaultValue.ToString(CultureInfo.InvariantCulture))
         {
         }
 

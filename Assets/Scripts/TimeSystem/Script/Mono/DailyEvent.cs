@@ -5,12 +5,14 @@ namespace TimeSystem
 {
     public class DailyEvent : MonoBehaviour
     {
-        [HideInInspector] public int Hour;
-        [HideInInspector] public int Minute;
-        [HideInInspector] public int Second;
+        public int Hour;
+        public int Minute;
+        public int Second;
+        public int DailyLimit = 5;
+        public int UsedAmount;
         public DateTime LastUsedTime = new DateTime();
-        long LastUsedTimeWithoutTimeOfDayTicks => LastUsedTime.Ticks-LastUsedTime.TimeOfDay.Ticks;
-        TimeSpan renewalTime => new TimeSpan(Hour, Minute, Second);
+        private long LastUsedTimeWithoutTimeOfDayTicks => LastUsedTime.Ticks-LastUsedTime.TimeOfDay.Ticks;
+        private TimeSpan renewalTime => new TimeSpan(Hour, Minute, Second);
         
         DateTime renewalDate
         {
@@ -23,30 +25,84 @@ namespace TimeSystem
             }
         }
 
-        long currentTimeTicks => TimerUtility.CurrentTime.Ticks;
-        long totalTicksExceptCurrentDay => currentTimeTicks - TimerUtility.CurrentTime.TimeOfDay.Ticks;
-        long renewalTicks => totalTicksExceptCurrentDay + renewalTime.Ticks;
-        
+        public float TickInterval = TimeSpan.TicksPerSecond*.5f;
+        private long lastTick;
+        public Action OnTick;
+        public Action OnRenewal;
+        public Action OnDailyLimitEnded;
+
+        protected virtual void Awake()
+        {
+            lastTick = TimerUtility.CurrentTime.Ticks;
+            if (IsRenewalTimePassed())
+            {
+                ResetUsedAmount();
+            }
+            if (!IsReadyToUse())
+            {
+                OnDailyLimitEnded?.Invoke();
+            }
+        }
+
+        private void Update()
+        {
+            if (lastTick + TickInterval > TimerUtility.CurrentTime.Ticks)
+            {
+                Tick();
+            }
+        }
+
+        void Tick()
+        {
+            if (IsRenewalTimePassed())
+            {
+                if (UsedAmount > 0)
+                {
+                    FirstTickAfterRenewal();
+                }
+            }            
+            OnTick?.Invoke();
+        }
+
+        private void FirstTickAfterRenewal()
+        {
+            ResetUsedAmount();
+            OnRenewal?.Invoke();
+        }
+
         public virtual void Use()
         {
             LastUsedTime = TimerUtility.CurrentTime;
+            UsedAmount++;
+            if (!IsReadyToUse())
+            {
+                OnDailyLimitEnded?.Invoke();
+            }
+        }
+        
+        protected virtual void ResetUsedAmount()
+        {
+            UsedAmount = 0;
         }
 
-        public virtual bool IsReadyToUse()
+        private bool IsRenewalTimePassed()
         {
             return renewalDate < TimerUtility.CurrentTime;
         }
-
-        public virtual TimeSpan GetRemainingTime()
+        
+        public bool IsReadyToUse()
         {
-            if (IsReadyToUse())
+            return UsedAmount < DailyLimit;
+        }
+
+        public TimeSpan GetRemainingTime()
+        {
+            if (IsRenewalTimePassed())
             {
                 return new TimeSpan();
             }
-            else
-            {
-                return renewalDate - TimerUtility.CurrentTime;
-            }
+
+            return renewalDate - TimerUtility.CurrentTime;
         }
         
     }

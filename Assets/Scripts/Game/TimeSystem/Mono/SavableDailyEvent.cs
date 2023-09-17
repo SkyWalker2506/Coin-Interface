@@ -1,23 +1,39 @@
-﻿using SaveSystem;
+﻿using System.Globalization;
+using SaveSystem;
 using TimeSystem;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game.TimeSystem
 {
     public class SavableDailyEvent : DailyEvent
     {
-        private string saveKey = "Last Called Event";
-        private IDateTimeSaveData dateTimeSaveData;
+        public string SaveKey="";
+        private string lastUsedTimeSaveKey=>$"{SaveKey} Last Used Time";
+        private string usedAmountSaveKey=>$"{SaveKey} Used Amount";
+        private IDateTimeSave dateTimeSave;
+        private IIntSave usedAmountSave;
 
-        private void Awake()
+        protected override void Awake()
         {
-            dateTimeSaveData = new SaveDateTimePlayerPref(saveKey, LastUsedTime.ToString("t"));
-            LastUsedTime = dateTimeSaveData.GetSavedDateTime();
+            dateTimeSave = new SaveDateTimePlayerPref(lastUsedTimeSaveKey, LastUsedTime);
+            LastUsedTime = dateTimeSave.GetSavedDateTime();
+            usedAmountSave = new SaveIntPlayerPref(usedAmountSaveKey, 0);
+            UsedAmount = usedAmountSave.GetSavedInt();
+            base.Awake();
         }
 
         public override void Use()
         {
             base.Use();
-            dateTimeSaveData.Save(LastUsedTime);
+            dateTimeSave.Save(LastUsedTime);
+            usedAmountSave.Save(UsedAmount);
+        }
+
+        protected override void ResetUsedAmount()
+        {
+            base.ResetUsedAmount();
+            usedAmountSave.Save(UsedAmount);
         }
     }
 }

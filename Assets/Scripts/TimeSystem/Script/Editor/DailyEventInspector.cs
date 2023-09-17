@@ -7,10 +7,10 @@ namespace TimeSystem
     [CustomEditor(typeof(DailyEvent))]
     public class DailyEventInspector : Editor
     {
-        private DailyEvent dailyEvent;
+        protected DailyEvent dailyEvent;
         private TimeSpan timeOfTheDay;
         
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             dailyEvent = (DailyEvent)target;
         }
@@ -19,6 +19,7 @@ namespace TimeSystem
         {
             timeOfTheDay = TimerUtility.CurrentTime.TimeOfDay;
             CurrentTime();
+            DailyLimit();
             EditorGUILayout.BeginHorizontal();
             EventRenewalTime();
             SetEventRenewalTimeToSecondsLater(5);
@@ -27,7 +28,6 @@ namespace TimeSystem
             EditorGUILayout.EndHorizontal();
             LastUsedTime();
             RemainingTime();
-
         }
 
         private void CurrentTime()
@@ -38,6 +38,16 @@ namespace TimeSystem
             EditorGUILayout.LabelField($"{(timeOfTheDay.Hours>9?timeOfTheDay.Hours:"0"+timeOfTheDay.Hours)}:{(timeOfTheDay.Minutes>9?timeOfTheDay.Minutes:"0"+timeOfTheDay.Minutes)}:{(timeOfTheDay.Seconds>9?timeOfTheDay.Seconds:"0"+timeOfTheDay.Seconds)} UTC");
             EditorGUILayout.EndHorizontal();
         }
+
+        private void DailyLimit()
+        {
+            EditorGUILayout.BeginHorizontal();
+            dailyEvent.DailyLimit = EditorGUILayout.IntField("Daily limit: ",Math.Max(dailyEvent.DailyLimit, 0));
+            EditorGUILayout.LabelField($"Used Amount: {dailyEvent.UsedAmount}",GUILayout.Width(90));
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
+        }
+        
         private void EventRenewalTime()
         {
             EditorGUILayout.BeginHorizontal();

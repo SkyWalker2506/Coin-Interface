@@ -2,7 +2,7 @@
 
 namespace SaveSystem
 {
-    public interface IDateTimeSaveData 
+    public interface IDateTimeSave 
     {
         public void Save(DateTime value);
         public DateTime GetSavedDateTime();
