@@ -1108,7 +1108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1174319312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,6 +1205,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0998bdcd38c790545849b6fbc93982e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winLoseChart:
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 100
+    <FalseChance>k__BackingField: 0
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 100
+    <FalseChance>k__BackingField: 0
+  - <TrueChance>k__BackingField: 100
+    <FalseChance>k__BackingField: 0
+  - <TrueChance>k__BackingField: 0
+    <FalseChance>k__BackingField: 100
+  - <TrueChance>k__BackingField: 5
+    <FalseChance>k__BackingField: 95
 --- !u!1 &1232646683
 GameObject:
   m_ObjectHideFlags: 0

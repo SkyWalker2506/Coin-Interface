@@ -7,7 +7,7 @@ namespace TimeSystem
     [CustomEditor(typeof(DailyEvent))]
     public class DailyEventInspector : Editor
     {
-        protected DailyEvent dailyEvent;
+        private DailyEvent dailyEvent;
         private TimeSpan timeOfTheDay;
         
         protected virtual void OnEnable()

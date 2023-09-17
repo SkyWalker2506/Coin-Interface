@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using LogicSystem;
 using UnityEngine;
 
 public class WheelOfFortune : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TrueFalseChance[] winLoseChart;
 
-    // Update is called once per frame
-    void Update()
+    private void OnValidate()
     {
-        
+        foreach (TrueFalseChance winLose in winLoseChart)
+        {
+            winLose.FalseChance = 100 - winLose.TrueChance;
+        }
     }
 }
