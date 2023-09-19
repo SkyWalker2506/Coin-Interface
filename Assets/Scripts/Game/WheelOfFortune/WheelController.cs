@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,6 +15,7 @@ namespace Game.WheelOfFortune
         [SerializeField] private float maxSpinTime;
         [SerializeField] private float slowingSpinSpeed;
         [SerializeField] private float slowingSpinTime;
+        [SerializeField] private TMP_Text selectedNumberText;
         private int targetNumber=1;
         private float targetAngle;
         private float anglePerNumber => 360f / TotalNumber;
@@ -48,12 +50,14 @@ namespace Game.WheelOfFortune
 
         public void MoveToNumber(int target)
         {
+            SetSelectedText(target);
             SetTarget(target);
             StartSpin();
         }
 
         public void AvoidNumber(int avoidNumber)
         {
+            SetSelectedText(avoidNumber);
             var number=0;
             do
             {
@@ -64,7 +68,12 @@ namespace Game.WheelOfFortune
             SetTarget(number);    
             StartSpin();
         }
-    
+
+        private void SetSelectedText(int number)
+        {
+            selectedNumberText.SetText($"{number} Selected");
+        }
+
         private void SetTarget(int number)
         {
             targetNumber = number;

@@ -12,8 +12,8 @@ namespace Game.WheelOfFortune
         [SerializeField] private BetPanel betPanel;
         [SerializeField] private WheelController wheelController;
         [SerializeField] private CurrencyController currencyController;
-        [SerializeField] private GameObject losePanel;
-        [SerializeField] private GameObject winPanel;
+        [SerializeField] private LosePanel losePanel;
+        [SerializeField] private WinPanel winPanel;
         private int playedCount;
         private string playedCountSaveKey = "Wheel Of Fortune Played Count";
         private IIntSave playedCountSaveData;
@@ -36,8 +36,8 @@ namespace Game.WheelOfFortune
         private void OnEnable()
         {
             OpenBetPanel();
-            losePanel.SetActive(false);
-            winPanel.SetActive(false);
+            losePanel.Close();
+            winPanel.Close();
             betPanel.OnBetSelected += OnBetSelected;
             wheelController.OnWheelStopped += OnWheelStopped;
         }
@@ -64,14 +64,14 @@ namespace Game.WheelOfFortune
 
         void OnLose()
         {
-            losePanel.SetActive(true);
+            losePanel.ShowLosePanel(selectedBetData.CoinBet);
             currencyController.Decrease(selectedBetData.CoinBet);
         }
         
         void OnWin()
         {
-            winPanel.SetActive(true);
-            currencyController.Increase(selectedBetData.CoinBet);
+            winPanel.ShowWinPanel(selectedBetData.CoinBet*2);
+            currencyController.Increase(selectedBetData.CoinBet*2);
         }
 
         private void OnBetSelected(BetData betData)
@@ -79,7 +79,7 @@ namespace Game.WheelOfFortune
             selectedBetData = betData;
             betPanel.gameObject.SetActive(false);
             wheelController.gameObject.SetActive(true);
-            if (winLoseChart[playedCount].GetResult())
+            if (winLoseChart[Math.Min(playedCount,winLoseChart.Length-1)].GetResult())
             {
                 wheelController.MoveToNumber(betData.Number);
             }

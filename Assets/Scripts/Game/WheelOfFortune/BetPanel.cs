@@ -9,6 +9,7 @@ namespace Game.WheelOfFortune
         [SerializeField] private Transform buttonHolder;
         [SerializeField] private BetSlider betSlider;
         public Action<BetData> OnBetSelected;
+        private int selectedNumber;
         public void Initialize(int coinAmount,int totalNumber)
         {
             betSlider.SetSlider(1, coinAmount);
@@ -42,7 +43,12 @@ namespace Game.WheelOfFortune
 
         void OnNumberSelected(int number)
         {
-            OnBetSelected?.Invoke(new BetData(number,betSlider.Value));
+            selectedNumber = number;
         }
+        
+        public void SelectBet()
+        {
+            OnBetSelected?.Invoke(new BetData(selectedNumber,betSlider.Value));
+        } 
     }
 }
