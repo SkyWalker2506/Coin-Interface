@@ -1,5 +1,4 @@
-﻿using System;
-using CurrencySystem;
+﻿using CurrencySystem;
 using SaveSystem;
 using UnityEngine;
 

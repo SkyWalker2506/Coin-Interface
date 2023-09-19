@@ -7,28 +7,34 @@ namespace Game.WheelOfFortune
 {
     public class BetSlider : MonoBehaviour
     {
-        [SerializeField] private Slider betSlider;
+        [SerializeField] private Slider slider;
         [SerializeField] private TMP_Text betText;
+        public int Value => (int)slider.value;
 
         private void Awake()
         {
-            OnSliderChanged(betSlider.value);
+            OnSliderChanged(slider.value);
         }
 
         private void OnEnable()
         {
-            betSlider.onValueChanged.AddListener(OnSliderChanged);
+            slider.onValueChanged.AddListener(OnSliderChanged);
         }
 
         private void OnDisable()
         {
-            betSlider.onValueChanged.RemoveListener(OnSliderChanged);
+            slider.onValueChanged.RemoveListener(OnSliderChanged);
         }
 
         private void OnSliderChanged(float value)
         {
             betText.SetText(value.ToString(CultureInfo.InvariantCulture));
         }
-        
+
+        public void SetSlider(int min, int max)
+        {
+            slider.minValue = min;
+            slider.maxValue = max;
+        }
     }
 }

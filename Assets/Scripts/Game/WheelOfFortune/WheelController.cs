@@ -8,7 +8,7 @@ namespace Game.WheelOfFortune
     {
         [SerializeField] private RectTransform wheel;
         [SerializeField] private RectTransform pin;
-        [Min(2)][SerializeField] private int totalNumber = 8;
+        [field:Min(2)][field:SerializeField] public int TotalNumber { get; private set; }=8;
         [SerializeField] private float spinSpeed;
         [SerializeField] private float minSpinTime;
         [SerializeField] private float maxSpinTime;
@@ -16,10 +16,8 @@ namespace Game.WheelOfFortune
         [SerializeField] private float slowingSpinTime;
         private int targetNumber=1;
         private float targetAngle;
+        private float anglePerNumber => 360f / TotalNumber;
 
-        private float anglePerNumber => 360f / totalNumber;
-  
-    
         private SpinState spinState;
         public Action<int> OnWheelStopped;
 
@@ -39,7 +37,7 @@ namespace Game.WheelOfFortune
                     StopWhenReachedToTarget();
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    break;
             }
         }
 
@@ -59,7 +57,7 @@ namespace Game.WheelOfFortune
             var number=0;
             do
             {
-                number = Random.Range(1, totalNumber + 1);
+                number = Random.Range(1, TotalNumber + 1);
             } while (number == avoidNumber);
 
         
@@ -70,9 +68,8 @@ namespace Game.WheelOfFortune
         private void SetTarget(int number)
         {
             targetNumber = number;
-            targetAngle = targetNumber * anglePerNumber + Random.Range(anglePerNumber*.2f, anglePerNumber-anglePerNumber*.2f);
+            targetAngle = (targetNumber-1) * anglePerNumber + Random.Range(anglePerNumber*.2f, anglePerNumber-anglePerNumber*.2f);
         }
-
 
         private void StartSpin()
         {
@@ -116,7 +113,7 @@ namespace Game.WheelOfFortune
 
         bool CheckInTargetArea()
         {
-            return Mathf.Abs(wheel.localRotation.eulerAngles.z- targetAngle) < anglePerNumber*.2f;
+            return Mathf.Abs((wheel.localRotation.eulerAngles.z+360)%360- targetAngle) < anglePerNumber*.2f;
         }
     
     }

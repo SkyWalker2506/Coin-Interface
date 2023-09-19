@@ -10,17 +10,17 @@ namespace Game.WheelOfFortune
         [SerializeField] private Button button;
         [SerializeField] private TMP_Text text;
         private int betValue;
-        public Action<int> OnBetSelected;
+        public static Action<int> OnSelected;
 
 
         private void OnEnable()
         {
-            button.onClick.AddListener(()=>OnBetSelected?.Invoke(betValue));
+            button.onClick.AddListener(()=>OnSelected?.Invoke(betValue));
         }
 
         private void OnDisable()
         {
-            button.onClick.RemoveListener(()=>OnBetSelected?.Invoke(betValue));
+            button.onClick.RemoveListener(()=>OnSelected?.Invoke(betValue));
         }
         
         

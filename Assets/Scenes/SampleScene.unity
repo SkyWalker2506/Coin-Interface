@@ -2300,6 +2300,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3641363194139087522, guid: 3103a14191734e046b51ae9d48ebb9da, type: 3}
+      propertyPath: coinController
+      value: 
+      objectReference: {fileID: 92161884}
+    - target: {fileID: 3641363194139087522, guid: 3103a14191734e046b51ae9d48ebb9da, type: 3}
+      propertyPath: currencyController
+      value: 
+      objectReference: {fileID: 92161884}
     - target: {fileID: 8968732422340494418, guid: 3103a14191734e046b51ae9d48ebb9da, type: 3}
       propertyPath: m_Pivot.x
       value: 0
