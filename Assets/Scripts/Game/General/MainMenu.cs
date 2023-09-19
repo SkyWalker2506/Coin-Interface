@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private SavableDailyEvent freeCoinEvent;
     [SerializeField] private Button extraCoinButton;
     [SerializeField] private Button freeCoinButton;
+    [SerializeField] private Button miniGameButton;
 
     private void OnEnable()
     {
@@ -19,6 +20,7 @@ public class MainMenu : MonoBehaviour
         extraCoinEvent.OnDailyLimitEnded += OnExtraCoinDailyLimitEnded;
         freeCoinEvent.OnRenewal += OnFreeCoinRenewal;
         freeCoinEvent.OnDailyLimitEnded += OnFreeCoinDailyLimitEnded;
+        currencyController.OnCurrencyUpdated += OnCurrencyUpdated;
     }
 
     private void OnDisable()
@@ -28,6 +30,7 @@ public class MainMenu : MonoBehaviour
         extraCoinEvent.OnDailyLimitEnded -= OnExtraCoinDailyLimitEnded;
         freeCoinEvent.OnRenewal -= OnFreeCoinRenewal;
         freeCoinEvent.OnDailyLimitEnded -= OnFreeCoinDailyLimitEnded;
+        currencyController.OnCurrencyUpdated -= OnCurrencyUpdated;
     }
 
     private void OnExtraCoinRenewal()
@@ -74,5 +77,10 @@ public class MainMenu : MonoBehaviour
             freeCoinEvent.Use();
             currencyController.Increase(1);
         }
+    }
+
+    private void OnCurrencyUpdated()
+    {
+        miniGameButton.interactable = currencyController.Currency.Amount > 0;
     }
 }

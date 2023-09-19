@@ -1,10 +1,22 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CurrencySystem
 {
     public abstract class CurrencyController : MonoBehaviour, ICurrencyController
     {
         public virtual ICurrency Currency { get; protected set; }
+        public Action OnCurrencyUpdated { get; set; }
+
+        private void OnEnable()
+        {
+            Currency.OnAmountUpdated += ()=>OnCurrencyUpdated?.Invoke();
+        }
+
+        private void OnDisable()
+        {
+            Currency.OnAmountUpdated -= ()=>OnCurrencyUpdated?.Invoke();
+        }
 
         public virtual void Set(float value)
         {
@@ -21,6 +33,7 @@ namespace CurrencySystem
         {
             Set(Currency.Amount - value);
         }
+
     }
     
     

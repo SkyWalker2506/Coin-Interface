@@ -1,0 +1,35 @@
+using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace Game.WheelOfFortune
+{
+    public class BetButton : MonoBehaviour
+    {
+        [SerializeField] private Button button;
+        [SerializeField] private TMP_Text text;
+        private int betValue;
+        public Action<int> OnBetSelected;
+
+
+        private void OnEnable()
+        {
+            button.onClick.AddListener(()=>OnBetSelected?.Invoke(betValue));
+        }
+
+        private void OnDisable()
+        {
+            button.onClick.RemoveListener(()=>OnBetSelected?.Invoke(betValue));
+        }
+        
+        
+        public void SetButton(int value)
+        {
+            betValue = value;
+            text.SetText(value.ToString());
+        }
+
+        
+    }
+}

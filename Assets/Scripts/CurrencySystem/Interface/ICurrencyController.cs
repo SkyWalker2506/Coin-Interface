@@ -1,4 +1,6 @@
-﻿namespace CurrencySystem
+﻿using System;
+
+namespace CurrencySystem
 {
     public interface ICurrencyController
     {
@@ -6,5 +8,6 @@
         void Set(float value);
         void Increase(float value);
         void Decrease(float value);
+        Action OnCurrencyUpdated{ get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CurrencySystem;
+﻿using System;
+using CurrencySystem;
 using SaveSystem;
 using UnityEngine;
 
@@ -13,6 +14,10 @@ namespace Game.CurrencySystem
         private void Awake()
         {
             _save = new SaveFloatPlayerPref(saveKey, defaultCoinAmount);
+        }
+
+        private void Start()
+        {
             Set(_save.GetSavedFloat());
         }
 
