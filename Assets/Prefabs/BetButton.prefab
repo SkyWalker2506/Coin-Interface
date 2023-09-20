@@ -272,4 +272,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 16155741160315466}
   text: {fileID: 322177722062728381}
-  selectedColor: {r: 0.014907437, g: 0.6320754, b: 0.17968494, a: 1}
+  selectedColor: {r: 0.9176471, g: 0.7725491, b: 0.003921569, a: 1}

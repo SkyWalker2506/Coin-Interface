@@ -8,6 +8,7 @@ namespace Game.WheelOfFortune
         [SerializeField] private BetButton betButtonPrefab;
         [SerializeField] private Transform buttonHolder;
         [SerializeField] private BetSlider betSlider;
+        private BetButton[] betButtons = Array.Empty<BetButton>();
         public Action<BetData> OnBetSelected;
         private int selectedNumber;
         public void Initialize(int coinAmount,int totalNumber)
@@ -16,34 +17,32 @@ namespace Game.WheelOfFortune
             CreateBetButtons(totalNumber);
         }
 
-        private void OnEnable()
-        {
-            BetButton.OnSelected += OnNumberSelected;
-        }
-
-        private void OnDisable()
-        {
-            BetButton.OnSelected -= OnNumberSelected;
-        }
-
         public void CreateBetButtons(int amount)
         {
-            int childCount = buttonHolder.childCount;
-            for (int i = 0; i < childCount; i++)
+            foreach (BetButton betButton in betButtons)
             {
-                Destroy(buttonHolder.GetChild(i).gameObject);
+                betButton.OnSelected -= OnNumberSelected;
+                Destroy(betButton.gameObject);
             }
-
+            betButtons = new BetButton[amount];
+            selectedNumber = 0;
             for (int i = 0; i < amount; i++)
             {
                 BetButton betButton = Instantiate(betButtonPrefab, buttonHolder);
                 betButton.SetButton(i+1);
+                betButtons[i] = betButton;
+                betButtons[i].OnSelected += OnNumberSelected;
             }
         }
 
         void OnNumberSelected(int number)
         {
+            if (selectedNumber > 0)
+            {
+                betButtons[selectedNumber-1].SetSelectedColor(false);
+            }
             selectedNumber = number;
+            betButtons[selectedNumber-1].SetSelectedColor(true);
         }
         
         public void SelectBet()

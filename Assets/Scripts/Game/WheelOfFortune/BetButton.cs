@@ -12,7 +12,7 @@ namespace Game.WheelOfFortune
         private Color baseColor;
         [SerializeField] private Color selectedColor;
         private int betValue;
-        public static Action<int> OnSelected;
+        public Action<int> OnSelected;
 
         private void Awake()
         {
@@ -22,13 +22,11 @@ namespace Game.WheelOfFortune
         private void OnEnable()
         {
             button.onClick.AddListener(()=>OnSelected?.Invoke(betValue));
-            OnSelected += OnButtonSelected;
         }
 
         private void OnDisable()
         {
             button.onClick.RemoveListener(()=>OnSelected?.Invoke(betValue));
-            OnSelected -= OnButtonSelected;
         }
         
         public void SetButton(int value)
@@ -37,16 +35,9 @@ namespace Game.WheelOfFortune
             text.SetText(value.ToString());
         }
         
-        private void OnButtonSelected(int index)
+        public void SetSelectedColor(bool isSelected)
         {
-            if (index == betValue)
-            {
-                button.image.color = selectedColor;
-            }
-            else
-            {
-                button.image.color = baseColor;
-            }
+            button.image.color = isSelected? selectedColor:baseColor;
         }
         
     }
